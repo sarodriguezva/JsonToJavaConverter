@@ -10,6 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JSONToJavaClassConverter {
     private String JSONFilePath;
     private ConcurrentHashMap<String, JsonNode> elements = new ConcurrentHashMap<>();
+    private LinkedHashMap<String, LinkedList<String>> finalClasses = new LinkedHashMap<>();
+
+    public LinkedHashMap<String, LinkedList<String>> getFinalClasses() {
+        return finalClasses;
+    }
 
     public JSONToJavaClassConverter(String JSONFilePath) {
         this.JSONFilePath = JSONFilePath;
@@ -202,11 +207,15 @@ public class JSONToJavaClassConverter {
     }
 
     private void createClass(String className, HashMap<String, JsonNode> attributes) {
-        System.out.println("Class name: " + capitalize(className));
+        LinkedList<String> attributesList = new LinkedList<>();
+        
         attributes.forEach((attributeName, attributeNode) -> {
+            attributesList.add("private " + getAttributeType(attributeName, attributeNode) + " " + attributeName + ";");
             System.out.println("Attr: " + getAttributeType(attributeName, attributeNode) + " " + attributeName + ";");
         });
         System.out.println();
+        
+        this.finalClasses.put(capitalize(className), attributesList);
     }
 }
 

@@ -2,11 +2,22 @@
   "nombre": "John Doe",
   "edad": 30,
   "ciudad": "Ciudad Ejemplo",
-  "telefonos": [
-    123,
-    456,
-    789
+  "contacto": {
+    "email": "johndoe@example.com",
+    "telefono": "1234567890"
+  },
+  "intereses": ["programación", "viajes", "deporte"],
+  "direcciones": [
+    {
+      "tipo": "casa",
+      "calle": "Calle Principal",
+      "numero": 123
+    },
+    {
+      "tipo": "trabajo",
+      "calle": "Avenida Secundaria",
+      "numero": 456
+    }
   ],
-  "avenida": "asdsad",
-  "isDemo": null
+  "avenida": "asdsad"
 }
