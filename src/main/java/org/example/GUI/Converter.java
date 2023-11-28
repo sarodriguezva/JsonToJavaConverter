@@ -91,8 +91,6 @@ public class Converter extends javax.swing.JFrame{
         buttonjson = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,7 +100,7 @@ public class Converter extends javax.swing.JFrame{
         jPanel1.setFocusTraversalPolicy(null);
 
         textAreaJSON.setEditable(false);
-        textAreaJSON.setBackground(new java.awt.Color(149, 149, 171));
+        textAreaJSON.setBackground(new java.awt.Color(196, 196, 202));
         textAreaJSON.setColumns(20);
         textAreaJSON.setFont(new java.awt.Font("Roboto Slab Light", 0, 18)); // NOI18N
         textAreaJSON.setRows(5);
@@ -111,7 +109,7 @@ public class Converter extends javax.swing.JFrame{
         jScrollPane1.setViewportView(textAreaJSON);
 
         textAreaConvertedJavaClass.setEditable(false);
-        textAreaConvertedJavaClass.setBackground(new java.awt.Color(150, 149, 171));
+        textAreaConvertedJavaClass.setBackground(new java.awt.Color(196, 196, 202));
         textAreaConvertedJavaClass.setColumns(20);
         textAreaConvertedJavaClass.setFont(new java.awt.Font("Roboto Slab Light", 0, 18)); // NOI18N
         textAreaConvertedJavaClass.setRows(5);
@@ -155,39 +153,31 @@ public class Converter extends javax.swing.JFrame{
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Texto en formato JSON");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\hewlett\\Documents\\NetBeansProjects\\JsonToJavaConverter-main\\src\\main\\java\\org\\example\\Imagenes\\json.png")); // NOI18N
-        jLabel3.setText("jLabel2");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\hewlett\\Documents\\NetBeansProjects\\JsonToJavaConverter-main\\src\\main\\java\\org\\example\\Imagenes\\java.png")); // NOI18N
-        jLabel4.setText("jLabel2");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonjson, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(59, 59, 59)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel2))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(305, 305, 305)
-                        .addComponent(buttoncreate, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(79, 79, 79))
+                        .addContainerGap(61, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonjson, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(124, 124, 124))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(buttoncreate, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(91, 91, 91))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,8 +185,6 @@ public class Converter extends javax.swing.JFrame{
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -228,20 +216,22 @@ public class Converter extends javax.swing.JFrame{
 
     private void buttoncreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttoncreateMouseClicked
         try {
-            JFrame jFrame1 = new JFrame();
-            JOptionPane.showMessageDialog(jFrame1, "Elige un directorio para crear el archivo");
+            JOptionPane.showMessageDialog(null, "Elige un directorio para crear el archivo");
             JFileChooser fc = new JFileChooser();
             fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int respuesta = fc.showOpenDialog(this);
+            
             //Comprobar si se ha pulsado Aceptar
             if (respuesta == JFileChooser.APPROVE_OPTION) {
                 //Crear un objeto File con el archivo elegido
                 File archivoElegido = fc.getSelectedFile();
                 String path = archivoElegido.getAbsolutePath();
+                
                 //Mostrar el nombre del archvivo en un campo de texto
                 String namedire = archivoElegido.getName();
                 String item = this.textAreaConvertedJavaClass.getText();
                 String pack = "package " + namedire + ".generated" + ";\n" + item;
+                
                 File directorio = new File(path + "/" + "/generated");
                 if (!directorio.exists()) {
                     if (directorio.mkdirs()) {
@@ -249,31 +239,30 @@ public class Converter extends javax.swing.JFrame{
                         // Si el archivo no existe es creado
                         if (!file.exists()) {
                             file.createNewFile();
-                            FileWriter fw = new FileWriter(file);
-                            BufferedWriter bw = new BufferedWriter(fw);
-                            bw.write(pack);
-                            bw.close();
-                            JFrame jFrame = new JFrame();
-                            JOptionPane.showMessageDialog(jFrame, "Su archivo ha sido creado con exito");
-                        }
-                        else{
-                            JFrame jFrame = new JFrame();
-                            JOptionPane.showMessageDialog(jFrame, "El archivo ya existe");
+                            // Try-with-resources, cierra los objetos autometicamente
+                            try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw)) {
+                                bw.write(pack);
+                            }
+                            showMessage("Su archivo ha sido creado con exito");
+                        } else {
+                            showMessage("El archivo ya existe");
                         }
                     } else {
-                        JFrame jFrame = new JFrame();
-                        JOptionPane.showMessageDialog(jFrame, "Error al crear al directorio");
-                    } 
-                } else{
-                        JFrame jFrame = new JFrame();
-                        JOptionPane.showMessageDialog(jFrame, "El directorio ya existe");
-                }   
+                        showMessage("Error al crear al directorio");
+                    }
+                } else {
+                    showMessage("El directorio ya existe");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_buttoncreateMouseClicked
-
+    
+    private void showMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+    
     private void buttonjsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonjsonActionPerformed
         this.dispose();
         FileChooser iniate = new FileChooser();
@@ -326,8 +315,6 @@ public class Converter extends javax.swing.JFrame{
     private javax.swing.JButton buttonjson;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
