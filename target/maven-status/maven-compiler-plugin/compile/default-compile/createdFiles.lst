@@ -1,9 +1,12 @@
-org\example\GUI\Converter.class
 org\example\JSONToJavaClassConverter.class
-org\example\Main.class
-org\example\GUI\FileChooser$2.class
 org\example\GUI\Converter$1.class
-org\example\GUI\FileChooser.class
 org\example\GUI\FileChooser$3.class
 org\example\Attribute.class
+org\example\GUI\Converter$4.class
+org\example\GUI\Converter.class
+org\example\Main.class
+org\example\GUI\Converter$3.class
+org\example\GUI\FileChooser$2.class
+org\example\GUI\FileChooser.class
+org\example\GUI\Converter$2.class
 org\example\GUI\FileChooser$1.class

@@ -7,14 +7,19 @@ package org.example.GUI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import javax.swing.*;
 import javax.swing.JOptionPane;
 import org.example.JSONToJavaClassConverter;
+import javax.swing.JFileChooser;
 
 /**
  *
  * @author Johan
  */
-public class Converter extends javax.swing.JFrame {
+public class Converter extends javax.swing.JFrame{
 
     /**
      * Creates new form Converter
@@ -24,6 +29,7 @@ public class Converter extends javax.swing.JFrame {
     
     public Converter() {
         initComponents();
+        this.setResizable(false);
     }
     
     public void setFilePath(String filePath) {
@@ -49,14 +55,13 @@ public class Converter extends javax.swing.JFrame {
         
         // Clase para ir concatenando los strings de las clases y atributos
         StringBuilder javaFileConverted = new StringBuilder();
-        
+        javaFileConverted.append("import java.util.ArrayList;\n\npublic ");
         if (jsonToJava.isAValidJSON()) {
             jsonToJava.getFinalClasses().forEach((className, attributes) -> {
-                javaFileConverted.append("class ").append(className).append(" {\n");
+                // javaFileConverted.append("package org.example;\nimport java.util.ArrayList;\n\npublic class ").append(className).append(" {\n");
                 attributes.forEach(attribute -> {
-                    javaFileConverted.append("        ").append(attribute).append("\n");
+                    javaFileConverted.append("").append(attribute).append("\n");
                 });
-                javaFileConverted.append("}").append("\n\n");
             });
         } else {
             JOptionPane.showMessageDialog(this, "El archivo JSON no es válido",
@@ -67,7 +72,7 @@ public class Converter extends javax.swing.JFrame {
         // Muestra el contenido del archivo Java convertido en el área de texto correspondiente
         this.textAreaConvertedJavaClass.setText(javaFileConverted.toString());
     }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,41 +87,126 @@ public class Converter extends javax.swing.JFrame {
         textAreaJSON = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaConvertedJavaClass = new javax.swing.JTextArea();
+        buttoncreate = new javax.swing.JButton();
+        buttonjson = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 33, 127));
+        jPanel1.setEnabled(false);
+        jPanel1.setFocusCycleRoot(true);
+        jPanel1.setFocusTraversalPolicy(null);
+
         textAreaJSON.setEditable(false);
-        textAreaJSON.setBackground(new java.awt.Color(255, 255, 255));
+        textAreaJSON.setBackground(new java.awt.Color(149, 149, 171));
         textAreaJSON.setColumns(20);
         textAreaJSON.setFont(new java.awt.Font("Roboto Slab Light", 0, 18)); // NOI18N
         textAreaJSON.setRows(5);
+        textAreaJSON.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 7));
+        textAreaJSON.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(textAreaJSON);
 
         textAreaConvertedJavaClass.setEditable(false);
-        textAreaConvertedJavaClass.setBackground(new java.awt.Color(255, 255, 255));
+        textAreaConvertedJavaClass.setBackground(new java.awt.Color(150, 149, 171));
         textAreaConvertedJavaClass.setColumns(20);
         textAreaConvertedJavaClass.setFont(new java.awt.Font("Roboto Slab Light", 0, 18)); // NOI18N
         textAreaConvertedJavaClass.setRows(5);
+        textAreaConvertedJavaClass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 7));
         jScrollPane2.setViewportView(textAreaConvertedJavaClass);
+
+        buttoncreate.setBackground(new java.awt.Color(100, 161, 241));
+        buttoncreate.setFont(new java.awt.Font("Open Sans", 1, 18)); // NOI18N
+        buttoncreate.setText("Crear Archivo");
+        buttoncreate.setToolTipText("");
+        buttoncreate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
+        buttoncreate.setCursor(new java.awt.Cursor(java.awt.Cursor.W_RESIZE_CURSOR));
+        buttoncreate.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        buttoncreate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttoncreateMouseClicked(evt);
+            }
+        });
+        buttoncreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttoncreateActionPerformed(evt);
+            }
+        });
+
+        buttonjson.setBackground(new java.awt.Color(100, 161, 241));
+        buttonjson.setFont(new java.awt.Font("Open Sans", 1, 18)); // NOI18N
+        buttonjson.setText("Nuevo Json");
+        buttonjson.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
+        buttonjson.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonjson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonjsonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 27)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Texto en formato clases de Java");
+
+        jLabel2.setFont(new java.awt.Font("Tempus Sans ITC", 1, 27)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Texto en formato JSON");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\hewlett\\Documents\\NetBeansProjects\\JsonToJavaConverter-main\\src\\main\\java\\org\\example\\Imagenes\\json.png")); // NOI18N
+        jLabel3.setText("jLabel2");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\hewlett\\Documents\\NetBeansProjects\\JsonToJavaConverter-main\\src\\main\\java\\org\\example\\Imagenes\\java.png")); // NOI18N
+        jLabel4.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addContainerGap(61, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonjson, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGap(59, 59, 59)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel2))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(305, 305, 305)
+                        .addComponent(buttoncreate, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(79, 79, 79))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addGap(43, 43, 43))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttoncreate, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonjson, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,7 +214,7 @@ public class Converter extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 50, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -135,6 +225,65 @@ public class Converter extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttoncreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttoncreateMouseClicked
+        try {
+            JFrame jFrame1 = new JFrame();
+            JOptionPane.showMessageDialog(jFrame1, "Elige un directorio para crear el archivo");
+            JFileChooser fc = new JFileChooser();
+            fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int respuesta = fc.showOpenDialog(this);
+            //Comprobar si se ha pulsado Aceptar
+            if (respuesta == JFileChooser.APPROVE_OPTION) {
+                //Crear un objeto File con el archivo elegido
+                File archivoElegido = fc.getSelectedFile();
+                String path = archivoElegido.getAbsolutePath();
+                //Mostrar el nombre del archvivo en un campo de texto
+                String namedire = archivoElegido.getName();
+                String item = this.textAreaConvertedJavaClass.getText();
+                String pack = "package " + namedire + ".generated" + ";\n" + item;
+                File directorio = new File(path + "/" + "/generated");
+                if (!directorio.exists()) {
+                    if (directorio.mkdirs()) {
+                        File file = new File(directorio + "/MyJson.java");
+                        // Si el archivo no existe es creado
+                        if (!file.exists()) {
+                            file.createNewFile();
+                            FileWriter fw = new FileWriter(file);
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            bw.write(pack);
+                            bw.close();
+                            JFrame jFrame = new JFrame();
+                            JOptionPane.showMessageDialog(jFrame, "Su archivo ha sido creado con exito");
+                        }
+                        else{
+                            JFrame jFrame = new JFrame();
+                            JOptionPane.showMessageDialog(jFrame, "El archivo ya existe");
+                        }
+                    } else {
+                        JFrame jFrame = new JFrame();
+                        JOptionPane.showMessageDialog(jFrame, "Error al crear al directorio");
+                    } 
+                } else{
+                        JFrame jFrame = new JFrame();
+                        JOptionPane.showMessageDialog(jFrame, "El directorio ya existe");
+                }   
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_buttoncreateMouseClicked
+
+    private void buttonjsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonjsonActionPerformed
+        this.dispose();
+        FileChooser iniate = new FileChooser();
+        iniate.Jsonitem();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonjsonActionPerformed
+
+    private void buttoncreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttoncreateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttoncreateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,6 +322,12 @@ public class Converter extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttoncreate;
+    private javax.swing.JButton buttonjson;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

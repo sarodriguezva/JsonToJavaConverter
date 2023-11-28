@@ -130,12 +130,12 @@ public class JSONToJavaClassConverter {
 
             if (!elementType.equals(mainType)) {
                 //Caso en el que se tiene un array de elementos de distinto tipo
-                boolean setLongDouble = 
-                    (mainType.equals("Long Integer") && elementType.equals("Long Double")) || 
-                    (mainType.equals("Long Double") && elementType.equals("Long Integer"));
+                boolean setDouble = 
+                    (mainType.equals("Integer") && elementType.equals("Double")) || 
+                    (mainType.equals("Double") && elementType.equals("Integer"));
 
-                if (setLongDouble){
-                    mainType = "Long Double";
+                if (setDouble){
+                    mainType = "Double";
                     break;
                 }
                 mainType = "Object";
@@ -200,13 +200,13 @@ public class JSONToJavaClassConverter {
     private String getNumberType(JsonNode node) {
         String number = node.toString();
         if (number.contains(".") && number.split("\\.")[0].length() < 19) {
-            return "Long Double";
+            return "Double";
         } else {
-            return "Long Integer";
+            return "Integer";
         }
     }
 
-    private void createClass(String className, HashMap<String, JsonNode> attributes) {
+    /*private void createClass(String className, HashMap<String, JsonNode> attributes) {
         LinkedList<String> attributesList = new LinkedList<>();
         
         attributes.forEach((attributeName, attributeNode) -> {
@@ -217,5 +217,34 @@ public class JSONToJavaClassConverter {
         
         this.finalClasses.put(capitalize(className), attributesList);
     }
+}*/
+    private void createClass(String className, HashMap<String, JsonNode> attributes) {
+        LinkedList<String> attributesList = new LinkedList<>();
+        Map<String, String> map = new HashMap<String, String>();
+        attributesList.add("class " + capitalize(className) + " {");
+        attributes.forEach((attributeName, attributeNode) -> {
+            String attributeType = getAttributeType(attributeName, attributeNode);
+            map.put(attributeName, attributeType);
+            attributesList.add("    private " + attributeType + " " + attributeName + ";");
+        });
+        attributesList.add("");
+        createget(map, attributesList);
+        createset(map, attributesList);
+        attributesList.add("}\n");
+        this.finalClasses.put(capitalize(className), attributesList);
+    }
+    
+    private void createget(Map<String, String> map, LinkedList<String> attributesList) {
+        for (Map.Entry<String, String> entry : map.entrySet()){
+            attributesList.add("    public " + entry.getValue() + " get" + capitalize(entry.getKey()) + "() {\n        return " + entry.getKey() + ";\n    }\n");
+        }
+      
+    }
+    private void createset(Map<String, String> map, LinkedList<String> attributesList) {
+        for (Map.Entry<String, String> entry : map.entrySet()){
+            attributesList.add("    public void set" + capitalize(entry.getKey()) + "(" + entry.getValue() + " " + entry.getKey() + ") {\n        this." + entry.getKey() + " = " + entry.getKey() + ";\n    }\n");
+        }
+    }
 }
+
 
