@@ -178,7 +178,6 @@ public class JSONToJavaClassConverter {
                 // Si se detecta un cambio de tipo, actualizar el tipo principal del array
                 if (setDouble){
                     mainType = "Double";
-                    break;
                 }
                 mainType = "Object";
                 break;
@@ -263,8 +262,9 @@ public class JSONToJavaClassConverter {
     private String getNumberType(JsonNode node) {
         if (node.isDouble() || node.isFloat()) {
             return "Double";
+        } else {
+            return "Integer";
         }
-        return "Integer";
     }
     
     /*
