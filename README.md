@@ -3,7 +3,7 @@ Convert JSON formatted data to a Java classes structure. Every object is mapped 
 Authors: Santiago Rodríguez Vallejo - Johan Sebastián Lemus Pedraza - Julián Steven Vega Daza
 Universidad Nacional de Colombia. Compiladores 2023-2.
 
-|                  |                   |
+| Referencias      |                   |
 | ---------------- | ----------------- |
 | Language         | Java ☕           |
 | Tree Generator   | Jackson 🌳        |
